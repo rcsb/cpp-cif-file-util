@@ -1,1 +1,8 @@
 * text=auto !eol
+/Makefile -text
+include/CifCorrector.h -text
+include/CifFileUtil.h -text
+lib/.cvsignore -text
+obj/.cvsignore -text
+src/CifCorrector.C -text
+src/CifFileUtil.C -text
