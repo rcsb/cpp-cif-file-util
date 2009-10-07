@@ -85,6 +85,21 @@ CifFile* ParseCif(const string& fileName, const bool verbose,
 }
 
 
+CifFile* ParseCifString(const string& cifString, const bool verbose,
+  const Char::eCompareType caseSense, const unsigned int maxLineLength,
+  const string& nullValue)
+{
+    CifFile* cifFileP = new CifFile(verbose, caseSense, maxLineLength,
+      nullValue);
+
+    CifParser cifParser(cifFileP, verbose);
+
+    cifParser.ParseString(cifString, cifFileP->_parsingDiags);
+
+    return (cifFileP);
+}
+
+
 DicFile* ParseDict(const string& dictFileName, DicFile* inRefFileP,
   const bool verbose)
 {
