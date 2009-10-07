@@ -62,19 +62,23 @@ void CheckCif(CifFile* cifFileP, DicFile* dictFileP, const string& cifFileName)
 }
 
 
-CifFile* ParseCif(const string& fileName, const bool verbose)
+CifFile* ParseCif(const string& fileName, const bool verbose,
+  const Char::eCompareType caseSense, const unsigned int maxLineLength,
+  const string& nullValue)
 {
-    CifFile* cifFileP = new CifFile(verbose);
+    CifFile* cifFileP = new CifFile(verbose, caseSense, maxLineLength,
+      nullValue);
 
     cifFileP->SetSrcFileName(fileName);
 
-    CifParser cifParser(cifFileP, cifFileP->GetVerbose());
+    CifParser cifParser(cifFileP, verbose);
 
     cifParser.Parse(fileName, cifFileP->_parsingDiags);
 
     if (!(cifFileP->_parsingDiags).empty())
     {
-        cout << "Diags for file " << fileName << "  = " << cifFileP->_parsingDiags << endl;
+        cout << "Diags for file " << fileName << "  = " <<
+          cifFileP->_parsingDiags << endl;
     }
 
     return (cifFileP);

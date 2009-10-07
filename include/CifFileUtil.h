@@ -24,7 +24,10 @@ void CheckCif(CifFile* cifFileP, DicFile* dictFileP,
 
 DicFile* ParseDict(const std::string& dictFileName, DicFile* ddlFileP = NULL,
   const bool verbose = false);
-CifFile* ParseCif(const std::string& fileName, const bool verbose = false);
+CifFile* ParseCif(const std::string& fileName, const bool verbose = false,
+  const Char::eCompareType caseSense = Char::eCASE_SENSITIVE,
+  const unsigned int maxLineLength = CifFile::STD_CIF_LINE_LENGTH,
+  const std::string& nullValue = CifString::UnknownValue);
 
 
 #endif
