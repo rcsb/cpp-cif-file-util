@@ -75,10 +75,12 @@ CifFile* ParseCif(const string& fileName, const bool verbose,
 
     cifParser.Parse(fileName, cifFileP->_parsingDiags);
 
-    if (!(cifFileP->_parsingDiags).empty())
+    const string& parsingDiags = cifFileP->GetParsingDiags();
+
+    if (!parsingDiags.empty())
     {
-        cout << "Diags for file " << fileName << "  = " <<
-          cifFileP->_parsingDiags << endl;
+        cout << "Diags for file " << fileName << "  = " << parsingDiags <<
+          endl;
     }
 
     return (cifFileP);
