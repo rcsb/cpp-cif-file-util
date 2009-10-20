@@ -75,6 +75,7 @@ CifFile* ParseCif(const string& fileName, const bool verbose,
 
     cifParser.Parse(fileName, cifFileP->_parsingDiags);
 
+#ifdef VLAD_DEL
     const string& parsingDiags = cifFileP->GetParsingDiags();
 
     if (!parsingDiags.empty())
@@ -82,6 +83,7 @@ CifFile* ParseCif(const string& fileName, const bool verbose,
         cout << "Diags for file " << fileName << "  = " << parsingDiags <<
           endl;
     }
+#endif
 
     return (cifFileP);
 }
