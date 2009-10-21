@@ -1,4 +1,3 @@
-#include <iostream>
 #include <string>
 
 #include "RcsbFile.h"
@@ -11,8 +10,6 @@
 #include "CifFileUtil.h"
 
 
-using std::cout;
-using std::endl;
 using std::string;
 
 
@@ -75,16 +72,6 @@ CifFile* ParseCif(const string& fileName, const bool verbose,
 
     cifParser.Parse(fileName, cifFileP->_parsingDiags);
 
-#ifdef VLAD_DEL
-    const string& parsingDiags = cifFileP->GetParsingDiags();
-
-    if (!parsingDiags.empty())
-    {
-        cout << "Diags for file " << fileName << "  = " << parsingDiags <<
-          endl;
-    }
-#endif
-
     return (cifFileP);
 }
 
@@ -111,6 +98,8 @@ DicFile* ParseDict(const string& dictFileName, DicFile* inRefFileP,
 
     DicFile* dictFileP = new DicFile(verbose);
 
+    dictFileP->SetSrcFileName(dictFileName);
+
     if (inRefFileP == NULL)
     {
         // DDL file parsing
@@ -123,14 +112,7 @@ DicFile* ParseDict(const string& dictFileName, DicFile* inRefFileP,
 
     DICParser dicParser(dictFileP, refFileP, verbose);
 
-    string diags;
-    dicParser.Parse(dictFileName, diags);
-
-    if (!diags.empty())
-    {
-        cout << "Dictionary file \"" << dictFileName << "\" parsing info "\
-          "= " << diags << endl;
-    }
+    dicParser.Parse(dictFileName, dictFileP->_parsingDiags);
 
     if (inRefFileP != NULL)
     {
