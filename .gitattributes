@@ -1,5 +1,6 @@
 * text=auto !eol
 /Makefile -text
+/SConscript -text
 include/CifCorrector.h -text
 include/CifFileUtil.h -text
 src/CifCorrector.C -text
