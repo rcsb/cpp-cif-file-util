@@ -1,6 +1,6 @@
 #
 # SConscript for cif-file-util
-# Updated: Oct  27, 2009 - Jdw
+# Updated: Aug 16, 2006 - Jdw
 #
 Import('env')
 #
@@ -13,6 +13,7 @@ libName = 'cif-file-util'
 libSrcList =['src/CifFileUtil.C',
 	     'src/CifCorrector.C']
 
+	     
 
 libObjList = [s.replace('.C','.o') for s in libSrcList]
 #
