@@ -34,5 +34,21 @@ CifFile* ParseCifString(const std::string& cifString,
   const unsigned int maxLineLength = CifFile::STD_CIF_LINE_LENGTH,
   const std::string& nullValue = CifString::UnknownValue);
 
+/**
+**  Corrects a CIF file with respect to the following:
+**    - Sets proper casing of the case-insensitive enumerations
+**
+**  \param[in] dicRef - reference to a dictionary file. The check is
+**    done against the first block in the dictionary file.
+**
+**  \return None
+**
+**  \pre None
+**
+**  \post None
+**
+**  \exception: None
+*/
+void DataCorrection(CifFile& cifFile, DicFile& dicRef);
 
 #endif

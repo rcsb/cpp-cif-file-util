@@ -657,7 +657,8 @@ void CifCorrector::CorrectEnums()
                 // Find what enumeration it is to be replaced with by finding
                 // enumInd within enumerations.
 
-                unsigned int enumInd = FindEnumIndex(currCellValue, enums);
+                unsigned int enumInd =
+                  CifCorrector::FindEnumIndex(currCellValue, enums);
 
                 if (enumInd == enums.size())
                 {
@@ -1167,6 +1168,104 @@ void CifCorrector::Write(const string& outFileName)
 {
     _cifFile.Write(outFileName);
 }
+
+
+void CifCorrector::CorrectEnumsSimple(CifFile& cifFile, DataInfo& dataInfo,
+  const bool verbose)
+{
+    // Get list of all categories in the CIF file
+    Block& block = cifFile.GetBlock(cifFile.GetFirstBlockName());
+
+    vector<string> catNames;
+    block.GetTableNames(catNames);
+
+    for (unsigned int catI = 0; catI < catNames.size(); ++catI)
+    {
+        const string& catName = catNames[catI];
+
+        // Get category table pointer.
+        ISTable* catTableP = block.GetTablePtr(catName);
+
+        // Get category attributes.
+        const vector<string>& attrNames = catTableP->GetColumnNames();
+
+        for (unsigned int attrI = 0; attrI < attrNames.size(); ++attrI)
+        {
+            const string& attribName = attrNames[attrI];
+
+            // Make a CIF item.
+            string item;
+            CifString::MakeCifItem(item, catName, attribName);
+
+            if (!dataInfo.IsItemDefined(item))
+            {
+#ifdef VLAD_DELETE
+                cerr << "Warning: Item \"" << item << "\" is not defined in "\
+                  "the internal dictionary." << endl;
+#endif
+            }
+
+            // Check to see if column is present
+            if (!catTableP->IsColumnPresent(attribName))
+            {
+#ifdef VLAD_DELETED
+                cerr << "Warning: Table \"" << catName << "\" does not "\
+                  "have column \"" << attribName << "\"." << endl;
+#endif
+                continue;
+            }
+
+            vector<string> enums = dataInfo.GetItemAttribute(item,
+              CifString::CIF_DDL_CATEGORY_ITEM_ENUMERATION,
+              CifString::CIF_DDL_ITEM_VALUE);
+
+            // Check if the attribute is defined as an enumeration
+            if (enums.empty())
+            {
+#ifdef VLAD_DELETE
+                cerr << "Warning: Item \"" << item << "\" does not have "\
+                  "enumerations defined." << endl;
+#endif
+                continue;
+            }
+
+            for (unsigned int rowI = 0; rowI < catTableP->GetNumRows(); ++rowI)
+            {
+                const string& currCellValue = (*catTableP)(rowI, attribName);
+
+                // Find what enumeration it is to be replaced with by finding
+                // enumInd within enumerations.
+
+                unsigned int enumInd =
+                  CifCorrector::FindEnumIndex(currCellValue, enums);
+
+                if (enumInd == enums.size())
+                {
+                    // No enumerations fix is done
+                    continue;
+                }
+
+                if (currCellValue == enums[enumInd])
+                {
+                    continue;
+                }
+
+                if (verbose)
+                {
+                    cout << "Info: Changing item \"" << item <<
+                      "\" value from \"" << currCellValue << "\"";
+                }
+
+                catTableP->UpdateCell(rowI, attribName, enums[enumInd]);
+
+                if (verbose)
+                {
+                    cout << " to \"" << enums[enumInd] << "\"" << endl;
+                }
+            } // for (all rows in category table)
+        } // for (all attributes of a category)
+    } // for (all categories in CIF file)
+} // End of CifCorrector::CorrectEnumsSimple()
 
 
 void CifCorrector::ValidateConfigTable()

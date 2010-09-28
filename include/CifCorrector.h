@@ -38,6 +38,9 @@ class CifCorrector
 
     void Write(const std::string& outFileName);
 
+    static void CorrectEnumsSimple(CifFile& cifFile, DataInfo& dataInfo,
+      const bool verbose = false);
+
   private:
     CifFile& _cifFile;
 
@@ -67,7 +70,7 @@ class CifCorrector
     void CorrectBadSequence(const std::string& item,
       const std::string& refCondItem, const std::string& refCondItemValue);
 
-    unsigned int FindEnumIndex(const std::string& value,
+    static unsigned int FindEnumIndex(const std::string& value,
       const std::vector<std::string>& enums);
     void FixNumericList(std::string& outValue, const std::string& inValue);
     void FixNotApplicable(std::string& outValue, const std::string& inValue);

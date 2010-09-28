@@ -7,6 +7,9 @@
 #include "CifParserBase.h"
 #include "DICParserBase.h"
 
+#include "CifDataInfo.h"
+#include "CifCorrector.h"
+
 #include "CifFileUtil.h"
 
 
@@ -129,5 +132,13 @@ DicFile* ParseDict(const string& dictFileName, DicFile* inRefFileP,
     }
 
     return (dictFileP);
+}
+
+
+void DataCorrection(CifFile& cifFile, DicFile& dicRef)
+{
+    CifDataInfo cifDataInfo(dicRef);
+
+    CifCorrector::CorrectEnumsSimple(cifFile, cifDataInfo);
 }
 
