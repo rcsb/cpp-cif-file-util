@@ -1,13 +1,15 @@
 #
 # SConscript for cif-file-util
 # Updated: Aug 16, 2006 - Jdw
+#          Mar 30, 2011 - jdw clone environment
 #
 Import('env')
+env=env.Clone()
 #
-if (len(env.subst('$MYDEBUG')) > 0):
-	dict = env.Dictionary()
-	for k,v in dict.items():
-		print  k, " = ", str(v)
+#if (len(env.subst('$MYDEBUG')) > 0):
+#	dict = env.Dictionary()
+#	for k,v in dict.items():
+#		print  k, " = ", str(v)
 #
 libName = 'cif-file-util'
 libSrcList =['src/CifFileUtil.C',
