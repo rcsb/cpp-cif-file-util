@@ -27,7 +27,8 @@ DicFile* ParseDict(const std::string& dictFileName, DicFile* ddlFileP = NULL,
 CifFile* ParseCif(const std::string& fileName, const bool verbose = false,
   const Char::eCompareType caseSense = Char::eCASE_SENSITIVE,
   const unsigned int maxLineLength = CifFile::STD_CIF_LINE_LENGTH,
-  const std::string& nullValue = CifString::UnknownValue);
+  const std::string& nullValue = CifString::UnknownValue,
+  const std::string& parseLogFileName = std::string());
 CifFile* ParseCifString(const std::string& cifString,
   const bool verbose = false,
   const Char::eCompareType caseSense = Char::eCASE_SENSITIVE,

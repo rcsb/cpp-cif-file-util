@@ -64,7 +64,7 @@ void CheckCif(CifFile* cifFileP, DicFile* dictFileP, const string& cifFileName)
 
 CifFile* ParseCif(const string& fileName, const bool verbose,
   const Char::eCompareType caseSense, const unsigned int maxLineLength,
-  const string& nullValue)
+  const string& nullValue, const string& parseLogFileName)
 {
     CifFile* cifFileP = new CifFile(verbose, caseSense, maxLineLength,
       nullValue);
@@ -73,7 +73,7 @@ CifFile* ParseCif(const string& fileName, const bool verbose,
 
     CifParser cifParser(cifFileP, verbose);
 
-    cifParser.Parse(fileName, cifFileP->_parsingDiags);
+    cifParser.Parse(fileName, cifFileP->_parsingDiags, parseLogFileName);
 
     return (cifFileP);
 }
