@@ -18,9 +18,9 @@ DicFile* GetDictFile(DicFile* ddlFileP, const std::string& dictFileName,
   const std::string& dictSdbFileName = std::string(), const bool verbose =
   false, const eFileMode fileMode = READ_MODE);
 void CheckDict(DicFile* dictFileP, DicFile* ddlFileP,
-  const string& dictFileName, const bool extraChecks = false);
+  const string& dictFileName, const bool extraDictChecks = false);
 void CheckCif(CifFile* cifFileP, DicFile* dictFileP,
-  const string& cifFileName);
+  const string& cifFileName, const bool extraCifChecks = false);
 
 DicFile* ParseDict(const std::string& dictFileName, DicFile* ddlFileP = NULL,
   const bool verbose = false);

@@ -40,25 +40,26 @@ DicFile* GetDictFile(DicFile* ddlFileP, const string& dictFileName,
 
 
 void CheckDict(DicFile* dictFileP, DicFile* ddlFileP,
-  const string& dictFileName, const bool extraChecks)
+  const string& dictFileName, const bool extraDictChecks)
 {
     string relLogFileName;
     RcsbFile::RelativeFileName(relLogFileName, dictFileName);
 
     relLogFileName += "-diag.log";
 
-    dictFileP->DataChecking(*ddlFileP, relLogFileName, extraChecks);
+    dictFileP->DataChecking(*ddlFileP, relLogFileName, extraDictChecks);
 }
 
 
-void CheckCif(CifFile* cifFileP, DicFile* dictFileP, const string& cifFileName)
+void CheckCif(CifFile* cifFileP, DicFile* dictFileP, const string& cifFileName,
+  const bool extraCifChecks)
 {
     string relLogFileName;
     RcsbFile::RelativeFileName(relLogFileName, cifFileName);
     
     relLogFileName += "-diag.log";
 
-    cifFileP->DataChecking(*dictFileP, relLogFileName);
+    cifFileP->DataChecking(*dictFileP, relLogFileName, false, extraCifChecks);
 }
 
 
