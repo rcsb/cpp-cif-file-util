@@ -10,6 +10,7 @@
 #include "CifDataInfo.h"
 #include "CifCorrector.h"
 
+#include "CifParentChild.h"
 #include "CifFileUtil.h"
 
 
@@ -23,7 +24,16 @@ DicFile* GetDictFile(DicFile* ddlFileP, const string& dictFileName,
 
     if (!dictFileName.empty())
     {
+        // If dictionary text file is specified, fileMode is ignored, as
+        // it is always writeable.
+
         dictFileP = ParseDict(dictFileName, ddlFileP, verbose);
+
+        Block& block = dictFileP->GetBlock(dictFileP->GetFirstBlockName());
+
+        CifParentChild cifParentChild(block);
+
+        cifParentChild.WriteGroupTables(block);
 
         return(dictFileP);
     }
