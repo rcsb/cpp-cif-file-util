@@ -34,6 +34,12 @@ CifFile* ParseCifString(const std::string& cifString,
   const Char::eCompareType caseSense = Char::eCASE_SENSITIVE,
   const unsigned int maxLineLength = CifFile::STD_CIF_LINE_LENGTH,
   const std::string& nullValue = CifString::UnknownValue);
+CifFile* ParseCifSimple(const std::string& fileName,
+  const bool verbose = false,
+  const unsigned int intCaseSense = 0,
+  const unsigned int maxLineLength = CifFile::STD_CIF_LINE_LENGTH,
+  const std::string& nullValue = CifString::UnknownValue,
+  const std::string& parseLogFileName = std::string());
 
 /**
 **  Corrects a CIF file with respect to the following:

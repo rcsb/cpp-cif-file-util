@@ -105,6 +105,16 @@ CifFile* ParseCifString(const string& cifString, const bool verbose,
 }
 
 
+CifFile* ParseCifSimple(const string& fileName,
+  const bool verbose, const unsigned int intCaseSense,
+  const unsigned int maxLineLength, const string& nullValue,
+  const string& parseLogFileName)
+{
+    return ParseCif(fileName, verbose, (Char::eCompareType)intCaseSense,
+      maxLineLength, nullValue, parseLogFileName);
+}
+
+
 DicFile* ParseDict(const string& dictFileName, DicFile* inRefFileP,
   const bool verbose)
 {
