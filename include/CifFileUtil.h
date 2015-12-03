@@ -10,6 +10,7 @@
 
 #include <string>
 
+#include "CifFileReadDef.h"
 #include "DicFile.h"
 #include "CifFile.h"
 
@@ -37,6 +38,12 @@ CifFile* ParseCifString(const std::string& cifString,
 CifFile* ParseCifSimple(const std::string& fileName,
   const bool verbose = false,
   const unsigned int intCaseSense = 0,
+  const unsigned int maxLineLength = CifFile::STD_CIF_LINE_LENGTH,
+  const std::string& nullValue = CifString::UnknownValue,
+  const std::string& parseLogFileName = std::string());
+CifFile* ParseCifSelective(const std::string& fileName,
+  const CifFileReadDef& readDef, const bool verbose = false,
+  const Char::eCompareType caseSense = Char::eCASE_SENSITIVE,
   const unsigned int maxLineLength = CifFile::STD_CIF_LINE_LENGTH,
   const std::string& nullValue = CifString::UnknownValue,
   const std::string& parseLogFileName = std::string());

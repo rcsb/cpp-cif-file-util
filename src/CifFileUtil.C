@@ -115,6 +115,24 @@ CifFile* ParseCifSimple(const string& fileName,
 }
 
 
+CifFile* ParseCifSelective(const string& fileName,
+  const CifFileReadDef& readDef, const bool verbose,
+  const Char::eCompareType caseSense, const unsigned int maxLineLength,
+  const string& nullValue, const string& parseLogFileName)
+{
+    CifFile* cifFileP = new CifFile(verbose, caseSense, maxLineLength,
+      nullValue);
+
+    cifFileP->SetSrcFileName(fileName);
+
+    CifParser cifParser(cifFileP, readDef, verbose);
+
+    cifParser.Parse(fileName, cifFileP->_parsingDiags, parseLogFileName);
+
+    return (cifFileP);
+}
+
+
 DicFile* ParseDict(const string& dictFileName, DicFile* inRefFileP,
   const bool verbose)
 {
