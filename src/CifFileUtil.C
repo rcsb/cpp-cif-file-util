@@ -117,11 +117,11 @@ CifFile* ParseCifSimple(const string& fileName,
 
 CifFile* ParseCifSelective(const string& fileName,
   const CifFileReadDef& readDef, const bool verbose,
-  const Char::eCompareType caseSense, const unsigned int maxLineLength,
+  const unsigned int intCaseSense, const unsigned int maxLineLength,
   const string& nullValue, const string& parseLogFileName)
 {
-    CifFile* cifFileP = new CifFile(verbose, caseSense, maxLineLength,
-      nullValue);
+    CifFile* cifFileP = new CifFile(verbose, (Char::eCompareType)intCaseSense,
+      maxLineLength, nullValue);
 
     cifFileP->SetSrcFileName(fileName);
 

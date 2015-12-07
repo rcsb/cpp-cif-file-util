@@ -43,7 +43,7 @@ CifFile* ParseCifSimple(const std::string& fileName,
   const std::string& parseLogFileName = std::string());
 CifFile* ParseCifSelective(const std::string& fileName,
   const CifFileReadDef& readDef, const bool verbose = false,
-  const Char::eCompareType caseSense = Char::eCASE_SENSITIVE,
+  const unsigned int intCaseSense = 0,
   const unsigned int maxLineLength = CifFile::STD_CIF_LINE_LENGTH,
   const std::string& nullValue = CifString::UnknownValue,
   const std::string& parseLogFileName = std::string());
