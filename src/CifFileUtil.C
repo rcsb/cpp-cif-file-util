@@ -62,14 +62,15 @@ void CheckDict(DicFile* dictFileP, DicFile* ddlFileP,
 
 
 void CheckCif(CifFile* cifFileP, DicFile* dictFileP, const string& cifFileName,
-  const bool extraCifChecks, const std::vector<std::string>& skipBlockNames, const bool secKeyCheck)
+  const bool extraCifChecks, const std::vector<std::string>& skipBlockNames, const bool secKeyCheck,
+const bool condMandatoryCatChecks, const bool condMandatoryItemChecks)
 {
     string relLogFileName;
     RcsbFile::RelativeFileName(relLogFileName, cifFileName);
     
     relLogFileName += "-diag.log";
 
-    cifFileP->DataChecking(*dictFileP, relLogFileName, false, extraCifChecks, skipBlockNames, secKeyCheck); 
+    cifFileP->DataChecking(*dictFileP, relLogFileName, false, extraCifChecks, skipBlockNames, secKeyCheck, condMandatoryCatChecks, condMandatoryItemChecks); 
 }
 
 
